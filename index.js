@@ -30,6 +30,23 @@ async function run(){
 
     }
 }
+async function run(){
+    try{
+        await client.connect();
+        const database = client.db('food_list');
+        const foodCollection = database.collection('foodlist');
+
+
+        app.get('/foodlist', async(req,res) =>{
+            const cursor = foodCollection.find({});
+            const foodItems = await cursor.toArray();
+            res.send(foodItems);
+        })
+    }
+    finally{
+
+    }
+}
 run().catch(console.dir);
 
 app.get('/', (req,res) =>{
