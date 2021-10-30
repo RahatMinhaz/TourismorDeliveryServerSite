@@ -30,6 +30,7 @@ async function run(){
 
     }
 }
+run().catch(console.dir);
 async function run(){
     try{
         await client.connect();
