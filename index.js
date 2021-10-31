@@ -33,6 +33,13 @@ async function run(){
             const query = {_id: ObjectId(id)};
             const food = await foodCollection.findOne(query);
             res.json(food);
+        });
+
+        app.delete('/foods/:id', async(req,res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await foodCollection.deleteOne(query);
+            res.json(result);
         })
     }
     finally{
