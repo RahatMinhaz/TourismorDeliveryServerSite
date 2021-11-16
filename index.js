@@ -20,12 +20,20 @@ async function run(){
         await client.connect();
         const database = client.db('food_items');
         const foodCollection = database.collection('foods');
+        const anotherFoodCollection = database.collection('foods2');
 
+        
 
         app.get('/foods', async(req,res) =>{
             const cursor = foodCollection.find({});
             const foods = await cursor.toArray();
             res.send(foods);
+        });
+        
+        app.get('/foods2', async(req,res) =>{
+            const cursor = anotherFoodCollection.find({});
+            const foods2 = await cursor.toArray();
+            res.send(foods2);
         });
 
         app.get('/foods/:id',async(req,res) =>{
