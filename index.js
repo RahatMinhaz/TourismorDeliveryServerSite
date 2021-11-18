@@ -29,11 +29,19 @@ async function run(){
             const cursor = userInfo.find(query);
             const orders = await cursor.toArray();
             res.json(orders);
-        })
+        });
+
         // Sending info to Database
         app.post('/usersinfo', async(req,res) =>{
             const info = req.body;
             const result = await userInfo.insertOne(info);
+            res.json(result);
+        });
+
+        app.delete('/usersinfo/:id', async(req,res) =>{
+            const id = req.params.id;
+            const query = {_id: Object(id)};
+            const result = await userInfo.deleteOne(query);
             res.json(result);
         })
 
