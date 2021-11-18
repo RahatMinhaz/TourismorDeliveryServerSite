@@ -21,8 +21,21 @@ async function run(){
         const database = client.db('food_items');
         const foodCollection = database.collection('foods');
         const anotherFoodCollection = database.collection('foods2');
+        const userInfo = database.collection('usersinfo');
 
-        
+        app.get('/usersinfo', async(req,res) =>{
+            const email = req.query.email;
+            const query = {email: email}
+            const cursor = userInfo.find(query);
+            const orders = await cursor.toArray();
+            res.json(orders);
+        })
+        // Sending info to Database
+        app.post('/usersinfo', async(req,res) =>{
+            const info = req.body;
+            const result = await userInfo.insertOne(info);
+            res.json(result);
+        })
 
         app.get('/foods', async(req,res) =>{
             const cursor = foodCollection.find({});
