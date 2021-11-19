@@ -39,9 +39,7 @@ async function run(){
         });
 
         app.get('/usersinfo', async(req,res) =>{
-            const email = req.query;
-            const query = {email: email}
-            const cursor = userInfo.find(query);
+            const cursor = userInfo.find({});
             const orders = await cursor.toArray();
             res.json(orders);
         });
