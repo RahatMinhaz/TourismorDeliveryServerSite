@@ -56,6 +56,12 @@ async function run(){
             const foods2 = await cursor.toArray();
             res.send(foods2);
         });
+        app.post('/foods2', async(req,res) =>{
+            const newItem = req.body;
+            newItem.id = foods2.length;
+            foods2.push(newItem);
+            res.json(newItem);
+        });
 
         app.get('/foods/:id',async(req,res) =>{
             const id = req.params.id;
