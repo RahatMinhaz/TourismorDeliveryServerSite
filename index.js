@@ -24,7 +24,7 @@ async function run(){
         const userInfo = database.collection('usersinfo');
         const userInfo2 = database.collection('usersinfo2');
 
-
+        // Managing all orders data
 
         app.get('/usersinfo2', async(req,res) =>{
             const cursor = userInfo2.find({});
@@ -32,11 +32,15 @@ async function run(){
             res.send(orders2);
         });
 
+        // Posting all ordered items on UI
+
         app.post('/usersinfo2', async(req,res) =>{
             const info2 = req.body;
             const result = await userInfo2.insertOne(info2);
             res.json(result);
         });
+
+        // Deleting an order
 
         app.delete('/usersinfo2/:id', async(req,res) =>{
             const id = req.params.id;
@@ -44,6 +48,8 @@ async function run(){
             const result = await userInfo2.deleteOne(query);
             res.json(result);
         })
+
+        // Showing logged in user's ordered item
 
         app.get('/usersinfo', async(req,res) =>{
             const email = req.query.email;
@@ -61,12 +67,16 @@ async function run(){
         });
 
 
+        // Deleting an order of the user
+
         app.delete('/usersinfo/:id', async(req,res) =>{
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
             const result = await userInfo.deleteOne(query);
             res.json(result);
         });
+
+        // Showing offerings on the home and menu page
 
         app.get('/foods', async(req,res) =>{
             const cursor = foodCollection.find({});
@@ -79,11 +89,16 @@ async function run(){
             const foods2 = await cursor.toArray();
             res.send(foods2);
         });
+
+        // Adding a new offering on home page
+
         app.post('/foods2', async(req,res) =>{
             const newItem = req.body;
             const result = await anotherFoodCollection.insertOne(newItem);
             res.json(result);
         });
+
+        // Placing an order
 
         app.get('/foods/:id',async(req,res) =>{
             const id = req.params.id;
@@ -91,6 +106,8 @@ async function run(){
             const food = await foodCollection.findOne(query);
             res.json(food);
         });
+
+        // Deleting an order
 
         app.delete('/foods/:id', async(req,res) => {
             const id = req.params.id;
