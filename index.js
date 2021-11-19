@@ -38,10 +38,12 @@ async function run(){
             res.json(result);
         });
 
-        app.post('/usersinfo', async(req,res) =>{
-            const info = req.body;
-            const result = await userInfo.insertMany(info);
-            res.json(result);
+        app.get('/usersinfo', async(req,res) =>{
+            const email = req.query;
+            const query = {email: email}
+            const cursor = userInfo.find(query);
+            const orders = await cursor.toArray();
+            res.json(orders);
         });
 
         app.delete('/usersinfo/:id', async(req,res) =>{
