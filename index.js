@@ -22,10 +22,17 @@ async function run(){
         const foodCollection = database.collection('foods');
         const anotherFoodCollection = database.collection('foods2');
         const userInfo = database.collection('usersinfo');
+        const userInfo2 = database.collection('usersinfo2');
 
 
-        app.get('/usersinfo', async(req,res) =>{
-            const cursor = userInfo.find({});
+        app.post('/usersinfo2', async(req,res) =>{
+            const info = req.body;
+            const result = await userInfo2.insertOne(info);
+            res.json(result);
+        });
+
+        app.get('/usersinfo2', async(req,res) =>{
+            const cursor = userInfo2.find({});
             const orders = await cursor.toArray();
             res.send(orders);
         });
