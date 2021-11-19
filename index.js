@@ -38,6 +38,13 @@ async function run(){
             res.json(result);
         });
 
+        app.delete('/usersinfo2/:id', async(req,res) =>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userInfo.deleteOne(query);
+            res.json(result);
+        })
+
         app.get('/usersinfo', async(req,res) =>{
             const email = req.query.email;
             const query = {email: email}
@@ -59,7 +66,7 @@ async function run(){
             const query = {_id: ObjectId(id)};
             const result = await userInfo.deleteOne(query);
             res.json(result);
-        })
+        });
 
         app.get('/foods', async(req,res) =>{
             const cursor = foodCollection.find({});
