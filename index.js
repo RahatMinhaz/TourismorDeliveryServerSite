@@ -25,16 +25,17 @@ async function run(){
         const userInfo2 = database.collection('usersinfo2');
 
 
-        app.post('/usersinfo2', async(req,res) =>{
-            const info = req.body;
-            const result = await userInfo2.insertOne(info);
-            res.json(result);
-        });
 
         app.get('/usersinfo2', async(req,res) =>{
             const cursor = userInfo2.find({});
-            const orders = await cursor.toArray();
-            res.send(orders);
+            const orders2 = await cursor.toArray();
+            res.send(orders2);
+        });
+
+        app.post('/usersinfo2', async(req,res) =>{
+            const info2 = req.body;
+            const result = await userInfo2.insertOne(info2);
+            res.json(result);
         });
 
         app.get('/usersinfo', async(req,res) =>{
