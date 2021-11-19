@@ -23,6 +23,13 @@ async function run(){
         const anotherFoodCollection = database.collection('foods2');
         const userInfo = database.collection('usersinfo');
 
+
+        app.get('/usersinfo', async(req,res) =>{
+            const cursor = userInfo.find({});
+            const orders = await cursor.toArray();
+            res.send(orders);
+        });
+
         app.get('/usersinfo', async(req,res) =>{
             const email = req.query.email;
             const query = {email: email}
@@ -38,11 +45,6 @@ async function run(){
             res.json(result);
         });
 
-        app.get('/usersinfo', async(req,res) =>{
-            const cursor = userInfo.find({});
-            const orders = await cursor.toArray();
-            res.send(orders);
-        });
 
         app.delete('/usersinfo/:id', async(req,res) =>{
             const id = req.params.id;
