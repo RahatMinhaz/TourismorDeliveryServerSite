@@ -41,7 +41,7 @@ async function run(){
         app.get('/usersinfo', async(req,res) =>{
             const cursor = userInfo.find({});
             const orders = await cursor.toArray();
-            res.json(orders);
+            res.send(orders);
         });
 
         app.delete('/usersinfo/:id', async(req,res) =>{
