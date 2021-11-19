@@ -38,6 +38,12 @@ async function run(){
             res.json(result);
         });
 
+        app.post('/usersinfo', async(req,res) =>{
+            const info = req.body;
+            const result = await userInfo.insertMany(info);
+            res.json(result);
+        });
+
         app.delete('/usersinfo/:id', async(req,res) =>{
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
