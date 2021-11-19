@@ -58,9 +58,8 @@ async function run(){
         });
         app.post('/foods2', async(req,res) =>{
             const newItem = req.body;
-            newItem.id = foods2.length;
-            foods2.push(newItem);
-            res.json(newItem);
+            const result = await anotherFoodCollection.insertOne(newItem);
+            res.json(result);
         });
 
         app.get('/foods/:id',async(req,res) =>{
