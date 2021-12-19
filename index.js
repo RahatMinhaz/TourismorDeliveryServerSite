@@ -76,6 +76,12 @@ async function run(){
             res.json(result);
         });
 
+        app.get('/usersinfo/:id',async(req,res) =>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await userInfo.findOne(query);
+            res.json(result);
+        })
         // Showing offerings on the home and menu page
 
         app.get('/foods', async(req,res) =>{
