@@ -82,6 +82,19 @@ async function run(){
             const query = {_id: ObjectId(id)};
             const result = await userInfo.findOne(query);
             res.json(result);
+        });
+
+        app.get('/usersinfo/:id', async(req,res) =>{
+            const id = req.params.id;
+            const payment = req.body;
+            const filter = {_id: ObjectId(id)};
+            const updateDoc = {
+                $set: {
+                    payment: payment
+                }
+            };
+            const result = await userInfo.updateOne(filterOne, updateDoc);
+            res.json(result);
         })
         // Showing offerings on the home and menu page
 
