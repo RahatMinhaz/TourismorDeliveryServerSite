@@ -84,7 +84,7 @@ async function run(){
             res.json(result);
         });
 
-        app.get('/usersinfo/:id', async(req,res) =>{
+        app.put('/usersinfo/:id', async(req,res) =>{
             const id = req.params.id;
             const payment = req.body;
             const filter = {_id: ObjectId(id)};
