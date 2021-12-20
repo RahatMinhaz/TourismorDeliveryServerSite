@@ -93,7 +93,7 @@ async function run(){
                     payment: payment
                 }
             };
-            const result = await userInfo.updateOne(filterOne, updateDoc);
+            const result = await userInfo.updateOne(filter, updateDoc);
             res.json(result);
         })
         // Showing offerings on the home and menu page
